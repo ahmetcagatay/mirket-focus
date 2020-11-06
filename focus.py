@@ -42,9 +42,9 @@ role_name = ""
 #Bot çalıştığında
 @bot.event
 async def on_ready():
-    print(f'{bot.user.name} çalışıyor...')
     now = datetime.datetime.now()
-    await bot.change_presence(activity=discord.Game(name=str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)))
+    print(f'{bot.user.name} çalışıyor...' + "-" + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+    #await bot.change_presence(activity=discord.Game(name=str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)))
 
 #setFocus komudu çalıştırıldığında
 @bot.command()
