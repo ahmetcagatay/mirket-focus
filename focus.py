@@ -14,7 +14,7 @@ adminRoleName="Kurucu"
 #2-setFocus fonksiyonu ile  hangi kanala girildiğinde ve hangi rolü vermek istediğinizi belirtmelisiniz.
 """
 .setFocus [Kanal Id] [Rol Adı]
-.setFocus [Resepsiyon] [Kayıtsız] (ÖRNEK)
+.setFocus [78949498798498] [Kayıtsız] (ÖRNEK)
 """
 
 #Ve başlıyoruz...
