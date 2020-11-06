@@ -1,30 +1,54 @@
+#Discordda Belirli bir kanala girildiğinde belirli rolü veren Bot
+
+"""
+Örneğin: Resepsiyon kanalına giren birisi için Kayıtsız rolünü verebilirsiniz.
+Örneğin: Çalışıyorum odasına giren birisi için Focus Mode rolünü verebilirsiniz.
+"""
+
+#Bu botu kanalınıza yükleyerek test edebilirsiniz.
+
+"""Yapmanız gerekenler"""
+#1-Botun komutlarına sadece "Kurucu" rolüne sahip olanlar erişebilir. 
+"""(İsterseniz kendi sunucunuzda "Kurucu" rolü oluşturmak yerine aşağıdaki adminRoleName'i değiştirerek kendi sunucunuzun yöneticisinin rol adını koyabilirsiniz)"""
+adminRoleName="Kurucu"
+#2-setFocus fonksiyonu ile  hangi kanala girildiğinde ve hangi rolü vermek istediğinizi belirtmelisiniz.
+"""
+.setFocus [Kanal Id] [Rol Adı]
+.setFocus [Resepsiyon] [Kayıtsız] (ÖRNEK)
+"""
+
+#Ve başlıyoruz...
 import discord
 import os
 import random
 import asyncio
 import aiohttp
+import time as t
+import datetime
 from discord import Game
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext.commands import errors
-import time as t
-import datetime
 
+#Buraya kendi tokeninizi girmelisiniz
 token = os.environ.get('BOT-TOKEN')
 
-#Bot prefix
+#Botun prefix'i
 bot = commands.Bot(command_prefix='.')
+#Kanal ve Rol Adı için başlangıç koşulları
 channel_id= 0 
 role_name = ""
 
+#Bot çalıştığında
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} çalışıyor...')
     now = datetime.datetime.now()
     await bot.change_presence(activity=discord.Game(name=str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)))
 
+#setFocus komudu çalıştırıldığında
 @bot.command()
-@commands.has_role("Kurucu")
+@commands.has_role(adminRoleName)
 async def setFocus(ctx, *args):
     global channel_id
     global role_name
@@ -41,12 +65,13 @@ async def setFocus(ctx, *args):
             OutputMessage += "\nRol İsmi: " + args[1]
     await ctx.send(OutputMessage + " \n**...olarak düzenlendi**")
 
+#commands komutu çalıştırıldığında
 @bot.command()
-@commands.has_role("Kurucu")
+@commands.has_role(adminRoleName)
 async def commands(ctx, *args):
     await ctx.send(".setFocus [ChannelId] [RoleName]")
 
-
+#Serverda herhangi birisi herhangi bir kanala girdiğinde
 @bot.event
 async def on_voice_state_update(member, before, after):
     print(channel_id)
@@ -85,3 +110,11 @@ async def on_voice_state_update(member, before, after):
                 pass
 
 bot.run(token)
+
+#Geliştirmelerinizi bekliyorum :)
+#Yapılacaklar
+"""
+#+# Kanallar düzenlenebilir olacak
+#-# Tek bir kanal için değil oluşturulan kanal listesi için sorgulama yapacak
+#-# Tek bir rol için değil belirli kanalları belirli roller için sorgulama yapacak
+"""
