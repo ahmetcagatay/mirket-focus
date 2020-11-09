@@ -36,8 +36,8 @@ token = os.environ.get('BOT-TOKEN')
 #Botun prefix'i
 bot = commands.Bot(command_prefix='.')
 #Kanal ve Rol Adı için başlangıç koşulları
-channel_id= 0 
-role_name = ""
+channel_id= 771647652232036352 
+role_name = "Çalışıyorum"
 
 #Bot çalıştığında
 @bot.event
