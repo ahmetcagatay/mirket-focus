@@ -32,7 +32,7 @@ from discord.ext.commands import errors
 
 #Buraya kendi tokeninizi girmelisiniz
 token = os.environ.get('BOT-TOKEN')
-
+# token = "NzE0MjA1ODc0NzA0NDgyMzc1.XsrSDQ.WBjAxCURaEbg3i2osCy3yrSsDHE"
 #Botun prefix'i
 bot = commands.Bot(command_prefix='.')
 #Kanal ve Rol Adı için başlangıç koşulları
